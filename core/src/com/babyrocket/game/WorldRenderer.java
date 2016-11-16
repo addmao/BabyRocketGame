@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public class WorldRenderer {
 	World world;
 	BabyRocketGame babyRocketGame;
+	GameScreen gameScreen;
 	
 	Vector2 position;
 	OrthographicCamera camera;
@@ -21,7 +22,11 @@ public class WorldRenderer {
 	Texture gameOverImg;
 	Texture tinyRocketImg;
 	
+	private int x;
+	private int y;
+	
 	public WorldRenderer(BabyRocketGame babyRocketgame) {
+		this.gameScreen = gameScreen;
 		font = new BitmapFont();
 		backgroundMoonImg = new Texture("moon_background.png");
 		readyImg = new Texture("bg1.jpg");
@@ -35,15 +40,18 @@ public class WorldRenderer {
 		this.babyRocketGame = babyRocketGame;
 		this.batch = batch;
 		//batch = babyRocketGame.batch;
+	
+		x = 30;
+		y = 30;
 	}
 	
 	//@Override
 	public void render() {
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+		//camera.update();
+		//batch.setProjectionMatrix(camera.combined);
 		renderMoonBackground();
 		renderTinyRocket();
-		renderAlien();
+		//renderAlien();
 		renderAsteroid();
 		renderPredator();
 		renderOil();
@@ -52,15 +60,17 @@ public class WorldRenderer {
 	
 	
 	public void renderMoonBackground() {
+		//batch.disableBlending();
 		batch.begin();
-		batch.draw(backgroundMoonImg, camera.position.x - 10 / 2, camera.position.y - 15/ 2, 10, 15);
+		batch.draw(backgroundMoonImg, 0, 0);
+		//batch.draw(backgroundMoonImg, camera.position.x - 10 / 2, camera.position.y - 15/ 2, 10, 15);
 		batch.end();	
 	}
 	
 	public void renderTinyRocket() {
-		batch.enableBlending();
+		//batch.enableBlending();
 		batch.begin();
-		batch.draw(tinyRocketImg, 20, 20);
+		batch.draw(tinyRocketImg, 30, 30);
 		batch.end();
 	}
 	

@@ -1,5 +1,9 @@
 package com.babyrocket.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,65 +24,72 @@ public class World {
 	public static final int GAME_OVER = 2;
 	private int score;
 	
+	public static final int TINY_ROCKET_VELOCITY_X = 30;
+	public static final int TINY_ROCKET_VELOCITY_Y = 30;
+	
 	public final TinyRocket tinyRocket;
-	public final List<Alien> alienList;
-	public final List<Asteroid> asteroidList;
-	public final List<Predator> predatorList;
-	public final List<Oil> oilList;
-	public final EngineBar;
-	
-	public final Random random;
-	
-	
+	public final ArrayList<Alien> alienList;
+	public final ArrayList<Asteroid> asteroidList;
+	public final ArrayList<Predator> predatorList;
+	public final ArrayList<Oil> oilList;
+	public final ArrayList<Stone> stoneList;
+	//public final EngineBar;
+	Random random;
 	
 	int stateTime;
 	int gameState;
-	
-	
-	World(BabyRocketGame babyRocketGame) {
-		score = 0;
+
+	public World(BabyRocketGame babyRocketGame) {
+		this.alienList = new ArrayList<Alien>();
+		this.asteroidList = new ArrayList<Asteroid>();
+		this.predatorList = new ArrayList<Predator>();
+		this.oilList = new ArrayList<Oil>();
+		this.babyRocketGame = babyRocketGame;
+		random = new Random();
+		playGame();
 	}
 	
-	public void update() {
-		float deltaOfTime = Gdx.graphics.getDeltaTime();
-		stateTime += deltaOfTime;
+	private void playGame() {
 		
-		if(Gdx.input.justTouched()) {
-			if(gameState == GAME_READY) {
-				gameState = GAME_RUNNING;
-			}
-		}
+		
+		
+	}
+
+	
+	public void update(float deltaTime) {
+		updateTinyRocket(deltaTime);
+		updateAlien(deltaTime);
+		updateAsteroid(deltaTime);
+		updatePredator(deltaTime);
+		updateOil(deltaTime);
+	}
+	
+	private void updateTinyRocket(float deltaTime) {
+		tinyRocket.
+		tinyRocket.update(float deltaTime, float accelX, float accelY);
+	}
+	
+	private void updateAlien(float deltaTime) {
 		
 	}
 	
-	
-	
-	/*public void draw() {
-		GL20 gl = Gdx.gl;
-		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	private void updateAsteroid(float deltaTime) {
 		
-		worldRenderer.render();
+	}
 	
-		gui.update();
-		babyRocketGame.batch.setProjectionMatrix(gui.combined);
-		babyRocketGame.batch.enableBlending();
-		babyRocketGame.batch.begin();
-		switch(gameState) {
-		case GAME_READY:
-			worldRenderer.readyState();
-			break;
-		case GAME_OVER:
-			worldRenderer.gameOverState();
-			break;
-		}
-		babyRocketGame.batch.end();
-	}*/
+	private void updatePredator(float deltaTime) {
+		
+	}
 	
-	//public int getScore() {
-	//	return score;
-	//}
+	private void updateOil(float deltaTime) {
+		
+		
+	}
 	
-	//public void increaseScore() {
-	//	score += 1;
-	//}
+	private void checkHit() {
+		checkHitAlien();
+		checkHitAsteroid();
+		checkHitPredator();
+		checkHitOil();
+	}
 }
